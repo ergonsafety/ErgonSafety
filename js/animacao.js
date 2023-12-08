@@ -18,4 +18,33 @@ function elementVisible(){
 
 }
 
+//Verificar se o usuário se encontra na página de contato
+document.addEventListener("DOMContentLoaded", function() {
+    var botaoContato = document.querySelector(".shortcutContact");
+    var secaoContato = document.getElementById("contact");
+  
+    botaoContato.addEventListener("click", function() {
+        botaoContato.style.display = "none";
+    });
+
+    window.addEventListener("scroll", function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight;
+      var clientHeight = document.documentElement.clientHeight;
+      if (isElementVisible(secaoContato) || scrollTop + clientHeight >= scrollHeight - 200) {
+        botaoContato.style.display = "none";
+      } else {
+        botaoContato.style.display = "block";
+      }
+    });
+  
+    function isElementVisible(element) {
+      var rect = element.getBoundingClientRect();
+      return (
+        rect.bottom >= 0 &&
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+      );
+    }
+  });  
+
 setInterval(elementVisible, 1)
